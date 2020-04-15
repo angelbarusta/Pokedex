@@ -1,27 +1,18 @@
-const bodyParser = require("body-parser");
-const axios = require("axios");
+// let XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
-app.get("/tasks", (req, res) => {
-  return res.json(dummyArray).status(200);
-});
+// const fetchData = (url_api) => {
+//   return new Promise((resolve, reject) => {
+//     const xhttp = new XMLHttpRequest();
+//     xhttp.open("GET", url_api, true);
+//     xhttp.onreadystatechange = () => {
+//       if (xhttp.readyState === 4) {
+//         xhttp.status === 200
+//           ? resolve(JSON.parse(xhttp.responseText))
+//           : reject(new Error("Error ", url_api));
+//       }
+//     };
+//     xhttp.send();
+//   });
+// };
 
-app.get("/tasks/:id", (req, res) => {
-  let filter = dummyArray.filter((w) => {
-    return w.id == req.params.id;
-  });
-
-  if (filter.length > 0) return res.json(filter[0]).status(200);
-
-  return res.json(null).status(200);
-});
-
-app.get("/types", (req, res) => {
-  axios
-    .get("https://53lsdx4cm6.execute-api.us-east-1.amazonaws.com/dev/task-type")
-    .then((result) => {
-      return res.json(result.data);
-    })
-    .catch((err) => {
-      return res.statusCode(400);
-    });
-});
+// module.exports = fetchData;
