@@ -1,6 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Card, Image, Label } from "semantic-ui-react";
+import {
+  Card,
+  Image,
+  Label,
+  Segment,
+  Dimmer,
+  Loader,
+  Transition,
+} from "semantic-ui-react";
 
 import { LA_LISTA } from "../redux/actions";
 
@@ -19,7 +27,8 @@ class CartasPokemon extends Component {
       habilidades: [],
       species: [],
       loading: false,
-      limite: 100,
+      limite: 50,
+      visible: true,
     };
   }
 
@@ -60,7 +69,8 @@ class CartasPokemon extends Component {
       .catch((err) => console.error(err));
   };
 
-  loadingFinish = () => this.setState({ loading: false });
+  loadingFinish = () =>
+    this.setState({ loading: false, visible: !this.state.visible });
 
   fetchDataSingle = (i) => {
     fetch(`${URL}${i + 1}/`)
@@ -78,7 +88,7 @@ class CartasPokemon extends Component {
   };
 
   render() {
-    const { lista, loading } = this.state;
+    const { lista, loading, visible } = this.state;
     console.log("state :", this.state);
     console.log("lista :", lista);
 
@@ -89,7 +99,16 @@ class CartasPokemon extends Component {
           onClick={(e) => this.fetchDataSingle(i)}
           style={{ color: "black", display: "flex", background: "#9bea9b" }}>
           {loading ? (
-            <div>ESperame...</div>
+            <div style={{ width: 290, height: 222 }}>
+              <Segment style={{ width: 290, height: 222 }}>
+                <Dimmer active inverted>
+                  <Loader inverted content='Loading' />
+                </Dimmer>
+                <Transition visible={visible} animation='jiggle' duration={200}>
+                  <Image src='/images/wireframe/short-paragraph.png' />
+                </Transition>
+              </Segment>
+            </div>
           ) : (
             <>
               <div
@@ -106,7 +125,12 @@ class CartasPokemon extends Component {
                   justifyContent: "space-around",
                 }}>
                 <div>
-                  <Image circular src={`${URL_SINGU}${i + 1}.png`} />
+                  <Transition
+                    visible={visible}
+                    animation='jiggle'
+                    duration={200}>
+                    <Image circular src={`${URL_SINGU}${i + 1}.png`} />
+                  </Transition>
                   <Label circular color='green' image>
                     {item.name}
                   </Label>
