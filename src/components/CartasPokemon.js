@@ -119,7 +119,7 @@ class CartasPokemon extends Component {
                     visible={visible}
                     animation='jiggle'
                     duration={200}>
-                    <Image circular src={`${URL_SINGU}${i + 1}.png`} />
+                    <Image src={`${URL_SINGU}${i + 1}.png`} />
                   </Transition>
                   <Label
                     style={{ marginBottom: 5 }}
@@ -150,7 +150,12 @@ class CartasPokemon extends Component {
       );
     });
 
-    return <section className='Galeria'>{ListaPokemons}</section>;
+    return (
+      <>
+        <h1 style={{ marginLeft: 15 }}>Pokedex</h1>
+        <section className='Galeria'>{ListaPokemons}</section>
+      </>
+    );
   }
 }
 

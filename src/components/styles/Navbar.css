@@ -10,6 +10,7 @@
     color: #0f0f0fde; 
     display: flex;
     align-items: center;
+    margin: 15px;
   }
   
   .Navbar__brand:hover {
@@ -17,7 +18,11 @@
     text-decoration: none;
   }
   
-  .Navbar__brand-logo {
+  .Navbar__brand-back {
+    margin-right: 0.5rem;
+   
+  }
+  .Navbar__brand-menu {
     margin-right: 0.5rem;
     
   }
@@ -37,4 +42,5 @@
       display: flex;
       justify-content: space-between;
     }
+   
   }

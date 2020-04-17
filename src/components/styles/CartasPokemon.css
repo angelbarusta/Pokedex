@@ -26,6 +26,10 @@
     flex-direction: column;
     padding: 10px;
 }
+.Galeria__Cards--image{
+    margin: auto;
+    min-width: 90px;
+  }
 
 
 
@@ -56,10 +60,13 @@
         align-content: space-around;
         padding: 10px;
     }
-  
     .Galeria__Cards--image{
-      margin: auto;
-    }
+        margin: auto;
+        min-width: 0px;
+      }
+  
+  
+    
 }
 
 /* @media screen and (max-width:320px){
@@ -77,4 +84,8 @@
         margin: 10px;
         background: rgb(155, 234, 155);
     }
+      .Galeria__Cards--image{
+        margin: auto;
+        min-width: 0px;
+      }
 } */
