@@ -29,6 +29,17 @@
     margin: auto;
     min-width: 90px;
   }
+.Galeria__Cards--Labels{
+    background: transparent;
+    border-radius: 29%;
+    color: white;
+    margin: auto;
+    margin-bottom: 10px;
+    padding: 3px;
+    font-size: 12px;
+    border: solid 1px white;
+    opacity: 55%;
+}
 
 
 

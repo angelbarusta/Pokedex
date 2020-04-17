@@ -151,9 +151,9 @@ class CartasPokemon extends Component {
 
                   {item.types.map((s) => {
                     return (
-                      <Label style={{ marginBottom: 5 }} circular color='green'>
+                      <div className='Galeria__Cards--Labels'>
                         {s.type.name}
-                      </Label>
+                      </div>
                     );
                   })}
                 </section>
