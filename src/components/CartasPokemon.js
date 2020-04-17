@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import {
   Card,
   Image,
@@ -86,20 +86,23 @@ class CartasPokemon extends Component {
     this.setState({ loading: false, visible: !this.state.visible });
   };
 
-  fetchDataSingle = (i) => {
+  fetchDataSingle = (i, name) => {
     fetch(`${URL}${i}/`)
       .then((response) => {
         return response.json();
       })
+      // .then((data) => {
+      //   this.setState({
+      //     pokeinfo: data,
+      //     type: data.types,
+      //     habilidades: data.abilities,
+      //   });
+      // })
       .then((data) => {
-        this.setState({
-          pokeinfo: data,
-          type: data.types,
-          habilidades: data.abilities,
-        });
+        this.props.SelectPokemon(data);
       })
-      .then(({ pokeinfo } = this.state) => {
-        this.props.SelectPokemon(pokeinfo);
+      .then(() => {
+        this.props.history.push(`/pokemon/${name}`);
       })
       .catch((err) => console.error(err));
   };
@@ -156,10 +159,9 @@ class CartasPokemon extends Component {
         }
 
         return (
-          <Link
-            to={`/pokemon/${item.name}`}
+          <div
             key={i}
-            onClick={(e) => this.fetchDataSingle(item.id)}
+            onClick={(e) => this.fetchDataSingle(item.id, item.name)}
             style={{ background: ColorBackgraund }}
             className='Galeria__Cards'>
             {loading ? (
@@ -222,7 +224,7 @@ class CartasPokemon extends Component {
                 </div>
               </>
             )}
-          </Link>
+          </div>
         );
       });
     } else {
@@ -246,4 +248,7 @@ const mapDispatchToProps = {
   Lista,
   SelectPokemon,
 };
-export default connect(mapStateToProps, mapDispatchToProps)(CartasPokemon);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(CartasPokemon));

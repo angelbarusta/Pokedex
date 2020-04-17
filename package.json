@@ -18,7 +18,8 @@
     "react": "16.8.3",
     "react-dom": "16.8.3",
     "react-router-dom": "4.3.1",
-    "xmlhttprequest": "1.8.0"
+    "xmlhttprequest": "1.8.0",
+    "react-router": "^5.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
@@ -40,12 +41,14 @@
     "eslint-plugin-react": "^7.19.0",
     "faker": "^4.1.0",
     "file-loader": "^6.0.0",
+    "history": "4.10.1",
     "html-webpack-plugin": "^4.0.4",
     "json-server": "0.14.2",
     "md5": "^2.2.1",
     "mini-css-extract-plugin": "^0.9.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "react-redux": "^7.2.0",
+    "react-router": "^5.1.2",
     "redux": "^4.0.5",
     "semantic-ui-react": "^0.88.2",
     "style-loader": "^1.1.3",
