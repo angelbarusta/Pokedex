@@ -28,7 +28,7 @@ class CartasPokemon extends Component {
       habilidades: [],
       species: [],
       loading: false,
-      limite: 10,
+      limite: 100,
       visible: true,
     };
   }
@@ -98,7 +98,7 @@ class CartasPokemon extends Component {
       var tipos = item.types.map((t) => {
         return t.type.name;
       });
-      console.log(`typos :${item.name}`, tipos);
+
       if (tipos[tipos.length - 1] == "fire") {
         var ColorBackgraund = "#f74c4c";
       } else if (tipos[tipos.length - 1] == "water") {
@@ -107,6 +107,28 @@ class CartasPokemon extends Component {
         var ColorBackgraund = "#039a8c";
       } else if (tipos[tipos.length - 1] == "bug") {
         var ColorBackgraund = "#8bf571";
+      } else if (tipos[tipos.length - 1] == "poison") {
+        var ColorBackgraund = "#b501d6";
+      } else if (tipos[tipos.length - 1] == "electric") {
+        var ColorBackgraund = "#fbdd08";
+      } else if (tipos[tipos.length - 1] == "ground") {
+        var ColorBackgraund = "#c78153";
+      } else if (tipos[tipos.length - 1] == "fairy") {
+        var ColorBackgraund = "#ffb8e0";
+      } else if (tipos[tipos.length - 1] == "flying") {
+        var ColorBackgraund = "#bcb8ff";
+      } else if (tipos[tipos.length - 1] == "ghost") {
+        var ColorBackgraund = "#3f2080";
+      } else if (tipos[tipos.length - 1] == "fighting") {
+        var ColorBackgraund = "#f57b2a";
+      } else if (tipos[tipos.length - 1] == "psychic") {
+        var ColorBackgraund = "#ff00bc";
+      } else if (tipos[tipos.length - 1] == "rock") {
+        var ColorBackgraund = "#cac4c4";
+      } else if (tipos[tipos.length - 1] == "ice") {
+        var ColorBackgraund = "aqua";
+      } else {
+        var ColorBackgraund = "gray";
       }
 
       return (
