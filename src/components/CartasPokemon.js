@@ -28,7 +28,7 @@ class CartasPokemon extends Component {
       habilidades: [],
       species: [],
       loading: false,
-      limite: 100,
+      limite: 200,
       visible: true,
     };
   }
@@ -126,7 +126,7 @@ class CartasPokemon extends Component {
       } else if (tipos[tipos.length - 1] == "rock") {
         var ColorBackgraund = "#cac4c4";
       } else if (tipos[tipos.length - 1] == "ice") {
-        var ColorBackgraund = "aqua";
+        var ColorBackgraund = "#0ef5df";
       } else {
         var ColorBackgraund = "gray";
       }
