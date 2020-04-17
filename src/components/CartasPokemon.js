@@ -28,7 +28,8 @@ class CartasPokemon extends Component {
       habilidades: [],
       species: [],
       loading: false,
-      limite: 200,
+      porceLoad: 0,
+      limite: 100,
       visible: true,
     };
   }
@@ -64,6 +65,12 @@ class CartasPokemon extends Component {
             .then(() => {
               if (this.state.lista.length == this.state.limite) {
                 this.loadingFinish();
+              } else {
+                this.setState({
+                  porceLoad: `${
+                    (this.state.lista.length * 100) / this.state.limite
+                  }%`,
+                });
               }
             });
         });
@@ -90,7 +97,7 @@ class CartasPokemon extends Component {
   };
 
   render() {
-    const { lista, loading, visible } = this.state;
+    const { lista, loading, visible, porceLoad } = this.state;
     console.log("state :", this.state);
     console.log("lista :", lista);
 
@@ -141,7 +148,7 @@ class CartasPokemon extends Component {
             <div style={{ width: 290, height: 222 }}>
               <Segment style={{ width: 290, height: 222 }}>
                 <Dimmer active inverted>
-                  <Loader inverted content='Loading' />
+                  <Loader inverted content={`Loading...(${porceLoad})`} />
                 </Dimmer>
                 <Transition visible={visible} animation='jiggle' duration={200}>
                   <div className='Galeria__Cards--image'>
