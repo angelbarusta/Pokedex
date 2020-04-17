@@ -62,6 +62,11 @@ class CartasPokemon extends Component {
                 loading: true,
               });
             })
+            .then(({ lista } = this.state) => {
+              if (this.state.lista.length == this.state.limite) {
+                this.props.Lista(lista);
+              }
+            })
             .then(() => {
               if (this.state.lista.length == this.state.limite) {
                 this.loadingFinish();
@@ -79,12 +84,7 @@ class CartasPokemon extends Component {
   };
 
   loadingFinish = () => {
-    const { lista } = this.state;
-    this.setState({ loading: false, visible: !this.state.visible })
-      .then(() => {
-        this.props.Lista(lista);
-      })
-      .catch((err) => console.error(err));
+    this.setState({ loading: false, visible: !this.state.visible });
   };
 
   fetchDataSingle = (i) => {
