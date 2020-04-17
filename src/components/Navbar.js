@@ -1,16 +1,14 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import faker from "faker";
 
 import "./styles/Navbar.css";
 
 import logo from "../images/az-nuevo_circular.png";
-import { Icon } from "semantic-ui-react";
+// import { Icon } from "semantic-ui-react";
 
 export const Navbar = (props) => {
   const { myList } = props;
-  let email_random = faker.internet.exampleEmail();
   return (
     <div className='Navbar'>
       <Link className='Navbar__brand' to='/'>
@@ -21,8 +19,6 @@ export const Navbar = (props) => {
           width={30}
           height={30}
         />
-        {/* <span className='font-weight-light'>Pokedex angel</span>
-        <span className='font-weight-bold'>App</span> */}
       </Link>
     </div>
   );

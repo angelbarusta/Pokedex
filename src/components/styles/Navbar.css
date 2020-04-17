@@ -7,8 +7,7 @@
   }
   
   .Navbar__brand {
-    color: #0f0f0fde;
-  
+    color: #0f0f0fde; 
     display: flex;
     align-items: center;
   }
@@ -28,4 +27,14 @@
     height: 50px;
     border-radius: 100%;
     color: #ffffff;
+  }
+
+  @media screen and (max-width:768px){
+    .Navbar {
+      width: 100%  !important;
+      padding: 0.5rem 0;
+      background-color: transparent;
+      display: flex;
+      justify-content: space-between;
+    }
   }

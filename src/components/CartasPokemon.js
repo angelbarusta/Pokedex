@@ -11,6 +11,7 @@ import {
 } from "semantic-ui-react";
 
 import { LA_LISTA } from "../redux/actions";
+import "../components/styles/CartasPokemon.css";
 
 const URL = `https://pokeapi.co/api/v2/pokemon/`;
 const URL_SINGU = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/`;
@@ -94,10 +95,10 @@ class CartasPokemon extends Component {
 
     const ListaPokemons = lista.map((item, i) => {
       return (
-        <Card
+        <div
           key={i}
           onClick={(e) => this.fetchDataSingle(i)}
-          style={{ color: "black", display: "flex", background: "#9bea9b" }}>
+          className='Galeria__Cards'>
           {loading ? (
             <div style={{ width: 290, height: 222 }}>
               <Segment style={{ width: 290, height: 222 }}>
@@ -111,38 +112,31 @@ class CartasPokemon extends Component {
             </div>
           ) : (
             <>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "flex-start",
-                  width: "100%",
-                }}>
-                <h1 style={{ color: "white", padding: 10 }}>{item.name}</h1>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-around",
-                }}>
-                <div>
+              <div className='Galeria__Cards--Content'>
+                <section className='Galeria__Cards--Items'>
+                  <h1>{item.name}</h1>
                   <Transition
                     visible={visible}
                     animation='jiggle'
                     duration={200}>
                     <Image circular src={`${URL_SINGU}${i + 1}.png`} />
                   </Transition>
-                  <Label circular color='green' image>
+                  <Label
+                    style={{ marginBottom: 5 }}
+                    circular
+                    color='green'
+                    image>
                     {item.name}
                   </Label>
-                  <Label circular color='green'>
+                  <Label style={{ marginBottom: 5 }} circular color='green'>
                     #{i}
                   </Label>
-                  <Label circular color='green'>
+                  <Label style={{ marginBottom: 5 }} circular color='green'>
                     {}
                   </Label>
-                </div>
+                </section>
 
-                <div>
+                <div className='Galeria__Cards--image'>
                   <Image
                     src={`https://pokeres.bastionbot.org/images/pokemon/${
                       i + 1
@@ -152,11 +146,11 @@ class CartasPokemon extends Component {
               </div>
             </>
           )}
-        </Card>
+        </div>
       );
     });
 
-    return <div>{ListaPokemons}</div>;
+    return <section className='Galeria'>{ListaPokemons}</section>;
   }
 }
 

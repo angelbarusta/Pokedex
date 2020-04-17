@@ -3,10 +3,10 @@ import React from "react";
 import Navbar from "./Navbar";
 
 function Layout(props) {
-  // const children = props.children;
+  const children = props.children;
 
   return (
-    <React.Fragment>
+    <React.Fragment style={{ width: "100%" }}>
       <Navbar />
       {props.children}
     </React.Fragment>
