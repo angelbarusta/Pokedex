@@ -28,7 +28,7 @@ class CartasPokemon extends Component {
       habilidades: [],
       species: [],
       loading: false,
-      limite: 50,
+      limite: 10,
       visible: true,
     };
   }
@@ -75,7 +75,7 @@ class CartasPokemon extends Component {
     this.setState({ loading: false, visible: !this.state.visible });
 
   fetchDataSingle = (i) => {
-    fetch(`${URL}${i + 1}/`)
+    fetch(`${URL}${i}/`)
       .then((response) => {
         return response.json();
       })
@@ -97,8 +97,8 @@ class CartasPokemon extends Component {
     const ListaPokemons = lista.map((item, i) => {
       return (
         <div
-          key={i}
-          onClick={(e) => this.fetchDataSingle(i)}
+          key={item.id}
+          onClick={(e) => this.fetchDataSingle(item.id)}
           className='Galeria__Cards'>
           {loading ? (
             <div style={{ width: 290, height: 222 }}>
@@ -117,7 +117,9 @@ class CartasPokemon extends Component {
             <>
               <div className='Galeria__Cards--Content'>
                 <section className='Galeria__Cards--Items'>
-                  <h1>{item.name}</h1>
+                  <h1>
+                    {item.name} #{item.id}
+                  </h1>
                   <Transition
                     visible={visible}
                     animation='jiggle'
@@ -131,12 +133,14 @@ class CartasPokemon extends Component {
                     image>
                     {item.name}
                   </Label>
-                  <Label style={{ marginBottom: 5 }} circular color='green'>
-                    #{i}
-                  </Label>
-                  <Label style={{ marginBottom: 5 }} circular color='green'>
-                    {}
-                  </Label>
+
+                  {item.types.map((s) => {
+                    return (
+                      <Label style={{ marginBottom: 5 }} circular color='green'>
+                        {s.type.name}
+                      </Label>
+                    );
+                  })}
                 </section>
 
                 <div className='Galeria__Cards--image'>
