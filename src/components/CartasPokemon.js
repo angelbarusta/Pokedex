@@ -95,10 +95,25 @@ class CartasPokemon extends Component {
     console.log("lista :", lista);
 
     const ListaPokemons = lista.map((item, i) => {
+      var tipos = item.types.map((t) => {
+        return t.type.name;
+      });
+      console.log(`typos :${item.name}`, tipos);
+      if (tipos[tipos.length - 1] == "fire") {
+        var ColorBackgraund = "#f74c4c";
+      } else if (tipos[tipos.length - 1] == "water") {
+        var ColorBackgraund = "rgb(48, 178, 241)";
+      } else if (tipos[tipos.length - 1] == "grass") {
+        var ColorBackgraund = "#039a8c";
+      } else if (tipos[tipos.length - 1] == "bug") {
+        var ColorBackgraund = "#8bf571";
+      }
+
       return (
         <div
-          key={item.id}
+          key={i}
           onClick={(e) => this.fetchDataSingle(item.id)}
+          style={{ background: ColorBackgraund }}
           className='Galeria__Cards'>
           {loading ? (
             <div style={{ width: 290, height: 222 }}>

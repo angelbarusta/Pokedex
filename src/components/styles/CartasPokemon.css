@@ -10,7 +10,6 @@
     color: black;
     display: flex;
     margin: 10px;
-    background: rgb(155, 234, 155);
     border-radius: 10%;
 }
 .Galeria__Cards--Content{
@@ -46,7 +45,6 @@
         color: black;
         display: flex;
         margin: 10px;
-        background: rgb(155, 234, 155);
         border-radius: 10%;
     }
     .Galeria__Cards--Content h1{
