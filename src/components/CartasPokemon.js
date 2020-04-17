@@ -39,15 +39,16 @@ class CartasPokemon extends Component {
 
   fetchAsync = async () => {
     try {
-      const data1 = await this.fetchData(`${URL}?limit=${this.state.limite}/`);
+      const data1 = await this.fetchData();
       const data2 = await this.loadingFinish();
     } catch (error) {
       console.error(error);
     }
   };
 
-  fetchData = (url) => {
-    fetch(url)
+  fetchData = () => {
+    //`${URL}?limit=${this.state.limite}/`
+    fetch(`${URL}?limit=${this.state.limite}/`)
       .then((response) => response.json())
       .then((data) => {
         data.results.map((item) => {
@@ -106,7 +107,9 @@ class CartasPokemon extends Component {
                   <Loader inverted content='Loading' />
                 </Dimmer>
                 <Transition visible={visible} animation='jiggle' duration={200}>
-                  <Image src='/images/wireframe/short-paragraph.png' />
+                  <div className='Galeria__Cards--image'>
+                    <Image src='/images/wireframe/short-paragraph.png' />
+                  </div>
                 </Transition>
               </Segment>
             </div>
@@ -119,7 +122,7 @@ class CartasPokemon extends Component {
                     visible={visible}
                     animation='jiggle'
                     duration={200}>
-                    <Image src={`${URL_SINGU}${i + 1}.png`} />
+                    <Image src={item.sprites.front_default} />
                   </Transition>
                   <Label
                     style={{ marginBottom: 5 }}
@@ -138,9 +141,7 @@ class CartasPokemon extends Component {
 
                 <div className='Galeria__Cards--image'>
                   <Image
-                    src={`https://pokeres.bastionbot.org/images/pokemon/${
-                      i + 1
-                    }.png`}
+                    src={`https://pokeres.bastionbot.org/images/pokemon/${item.id}.png`}
                   />
                 </div>
               </div>
