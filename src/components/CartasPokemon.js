@@ -10,7 +10,7 @@ import {
   Transition,
 } from "semantic-ui-react";
 
-import { LA_LISTA } from "../redux/actions";
+import { Lista, SelectPokemon } from "../redux/actions";
 import "../components/styles/CartasPokemon.css";
 
 const URL = `https://pokeapi.co/api/v2/pokemon/`;
@@ -29,7 +29,7 @@ class CartasPokemon extends Component {
       species: [],
       loading: false,
       porceLoad: 0,
-      limite: 100,
+      limite: 20,
       visible: true,
     };
   }
@@ -78,8 +78,14 @@ class CartasPokemon extends Component {
       .catch((err) => console.error(err));
   };
 
-  loadingFinish = () =>
-    this.setState({ loading: false, visible: !this.state.visible });
+  loadingFinish = () => {
+    const { lista } = this.state;
+    this.setState({ loading: false, visible: !this.state.visible })
+      .then(() => {
+        this.props.Lista(lista);
+      })
+      .catch((err) => console.error(err));
+  };
 
   fetchDataSingle = (i) => {
     fetch(`${URL}${i}/`)
@@ -93,13 +99,17 @@ class CartasPokemon extends Component {
           habilidades: data.abilities,
         });
       })
+      .then(({ pokeinfo } = this.state) => {
+        this.props.SelectPokemon(pokeinfo);
+      })
       .catch((err) => console.error(err));
   };
 
   render() {
-    const { lista, loading, visible, porceLoad } = this.state;
+    const { lista, loading, visible, porceLoad, limite } = this.state;
+    //console.log("state :", this.props);
     console.log("state :", this.state);
-    console.log("lista :", lista);
+    // console.log("lista :", lista);
 
     const ListaPokemons = lista.map((item, i) => {
       var tipos = item.types.map((t) => {
@@ -134,6 +144,12 @@ class CartasPokemon extends Component {
         var ColorBackgraund = "#cac4c4";
       } else if (tipos[tipos.length - 1] == "ice") {
         var ColorBackgraund = "#0ef5df";
+      } else if (tipos[tipos.length - 1] == "dark") {
+        var ColorBackgraund = "#291e1e";
+      } else if (tipos[tipos.length - 1] == "steel") {
+        var ColorBackgraund = "#ece9e9";
+      } else if (tipos[tipos.length - 1] == "dragon") {
+        var ColorBackgraund = "#806698";
       } else {
         var ColorBackgraund = "gray";
       }
@@ -148,7 +164,13 @@ class CartasPokemon extends Component {
             <div style={{ width: 290, height: 222 }}>
               <Segment style={{ width: 290, height: 222 }}>
                 <Dimmer active inverted>
-                  <Loader inverted content={`Loading...(${porceLoad})`} />
+                  <Loader
+                    inverted
+                    content={`
+                      Loading...${parseInt(porceLoad)}%
+                      ${lista.length} de ${limite}
+                      `}
+                  />
                 </Dimmer>
                 <Transition visible={visible} animation='jiggle' duration={200}>
                   <div className='Galeria__Cards--image'>
@@ -209,6 +231,7 @@ class CartasPokemon extends Component {
 }
 
 const mapDispatchToProps = {
-  LA_LISTA,
+  Lista,
+  SelectPokemon,
 };
 export default connect(null, mapDispatchToProps)(CartasPokemon);

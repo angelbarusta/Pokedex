@@ -7,10 +7,16 @@
 }
 
 .Galeria__Cards{
-    color: black;
     display: flex;
     margin: 10px;
     border-radius: 10%;
+    cursor: pointer;
+}
+.Galeria__Cards:hover{
+    display: flex;
+    margin: 15px;
+    border: solid 1px white;
+    cursor: pointer;
 }
 .Galeria__Cards--Content{
     display: flex;
@@ -53,11 +59,16 @@
     }
     
     .Galeria__Cards{
-        color: black;
         display: flex;
         margin: 10px;
         border-radius: 10%;
     }
+    .Galeria__Cards:hover{
+        display: flex;
+        margin: 12px;
+        border: solid 1px white;
+    }
+ 
     .Galeria__Cards--Content h1{
         color: white;
         font-size: 15px;
@@ -78,23 +89,3 @@
     
 }
 
-/* @media screen and (max-width:320px){
-    .Galeria{
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr;
-        margin: 0;
-        padding: 0;
-    }
-    
-    .Galeria__Cards{
-        color: black;
-        display: flex;
-        margin: 10px;
-        background: rgb(155, 234, 155);
-    }
-      .Galeria__Cards--image{
-        margin: auto;
-        min-width: 0px;
-      }
-} */

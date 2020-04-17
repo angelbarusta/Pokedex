@@ -8,7 +8,10 @@ import App from "./components/App";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const initialState = [];
+const initialState = {
+  myList: [],
+  selectPoke: [],
+};
 console.log("initialState :", initialState);
 //este es el store e redux
 const store = createStore(reducer, initialState, composeEnhancers());

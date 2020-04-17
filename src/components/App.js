@@ -11,6 +11,7 @@ function App() {
       <Layout>
         <Switch>
           <Route exact path='/' component={Home} />
+          {/* <Route exact path={`/pokemon/${name}`} component={Pokemon} /> */}
           <Route component={NotFound} />
         </Switch>
       </Layout>
