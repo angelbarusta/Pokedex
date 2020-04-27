@@ -5,7 +5,6 @@ import DetailsPoke from "../components/detailsPoke.js";
 const Pokemon = ({ selectPoke }) => {
   return (
     <div>
-      Hola soy {selectPoke.name}
       <DetailsPoke />
     </div>
   );

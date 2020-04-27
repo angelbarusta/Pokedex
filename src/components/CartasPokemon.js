@@ -30,7 +30,7 @@ class CartasPokemon extends Component {
       species: [],
       loading: false,
       porceLoad: 0,
-      limite: 10,
+      limite: 11,
       visible: true,
     };
   }
@@ -66,12 +66,13 @@ class CartasPokemon extends Component {
                 this.props.Lista(arr);
               })
               .then(() => {
-                if (this.state.lista.length >= this.state.limite) {
+                if (this.props.myList.length >= this.state.limite) {
                   this.loadingFinish();
                 } else {
                   this.setState({
+                    loading: true,
                     porceLoad: `${
-                      (this.state.lista.length * 100) / this.state.limite
+                      (this.props.myList.length * 100) / this.state.limite
                     }%`,
                   });
                 }
@@ -91,13 +92,7 @@ class CartasPokemon extends Component {
       .then((response) => {
         return response.json();
       })
-      // .then((data) => {
-      //   this.setState({
-      //     pokeinfo: data,
-      //     type: data.types,
-      //     habilidades: data.abilities,
-      //   });
-      // })
+
       .then((data) => {
         this.props.SelectPokemon(data);
       })
