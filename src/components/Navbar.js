@@ -11,7 +11,9 @@ import { Icon } from "semantic-ui-react";
 // import { Icon } from "semantic-ui-react";
 
 const handleResetColorB = (props) => {
+  event.preventDefault();
   props.ColorBack("transparent");
+  console.log("CLIK :>> ");
 };
 
 export const Navbar = (props) => {
@@ -29,7 +31,7 @@ export const Navbar = (props) => {
       <Link
         className='Navbar__brand'
         to='/'
-        onClick={(e) => handleResetColorB(e)}>
+        onClick={(e) => handleResetColorB(props)}>
         <Icon
           name='arrow left'
           style={{ color: colorLike }}
