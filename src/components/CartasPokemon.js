@@ -30,7 +30,7 @@ class CartasPokemon extends Component {
       species: [],
       loading: false,
       porceLoad: 0,
-      limite: 300,
+      limite: 100,
       visible: true,
     };
   }
@@ -235,7 +235,11 @@ class CartasPokemon extends Component {
     return (
       <>
         <h1 style={{ marginLeft: 15 }}>Pokedex</h1>
-        <section className='Galeria'>{ListaPokemons}</section>
+        {myList.length > 0 ? (
+          <section className='Galeria'>{ListaPokemons}</section>
+        ) : (
+          <section className='Galeria'>Loading...</section>
+        )}
       </>
     );
   }
