@@ -30,7 +30,7 @@ class CartasPokemon extends Component {
       species: [],
       loading: false,
       porceLoad: 0,
-      limite: 20,
+      limite: 200,
       visible: true,
     };
   }
@@ -38,7 +38,7 @@ class CartasPokemon extends Component {
   componentWillMount() {
     if (this.props.myList.length == 0) {
       this.fetchAsync();
-    } else if (this.props.myList.length >= this.state.limite) {
+    } else {
       this.loadingFinish();
     }
   }
@@ -54,42 +54,41 @@ class CartasPokemon extends Component {
   };
 
   fetchData = () => {
-    if (this.state.lista.length === 0) {
-      fetch(`${URL}?limit=${this.state.limite}/`)
-        .then((response) => response.json())
-        .then((data) => {
-          data.results.map((item) => {
-            fetch(item.url)
-              .then((response) => response.json())
-              .then((allpokemon) => arr.push(allpokemon))
-              .then(() => {
+    fetch(`${URL}?limit=${this.state.limite}/`)
+      .then((response) => response.json())
+      .then((data) => {
+        data.results.map((item) => {
+          fetch(item.url)
+            .then((response) => response.json())
+            .then((allpokemon) => arr.push(allpokemon))
+            .then(() => {
+              this.setState({
+                lista: arr,
+              });
+            })
+            // .then(() => {
+            //   this.props.Lista(arr);
+            // })
+            .then(() => {
+              if (this.state.lista.length >= this.state.limite) {
+                this.loadingFinish();
+              } else {
                 this.setState({
-                  lista: arr,
+                  loading: true,
                 });
-              })
-              .then(() => {
-                this.props.Lista(arr);
-              })
-              .then(() => {
-                if (this.state.lista.length >= this.state.limite) {
-                  this.loadingFinish();
-                } else {
-                  this.setState({
-                    loading: true,
-                  });
-                }
-              })
-              .catch((err) => console.error(err));
-          });
-        })
+              }
+            })
+            .catch((err) => console.error(err));
+        });
+      })
 
-        .catch((err) => console.error(err));
-    }
+      .catch((err) => console.error(err));
   };
 
   loadingFinish = () => {
-    // this.props.Lista(this.state.lista);
-
+    if (this.props.myList.length == 0) {
+      this.props.Lista(arr);
+    }
     this.setState({ loading: false, visible: !this.state.visible });
   };
 
@@ -158,7 +157,7 @@ class CartasPokemon extends Component {
           var ColorBackgraund = "gray";
         }
 
-        var porci = (myList.length * 100) / this.state.limite;
+        var porci = (lista.length * 100) / this.state.limite;
 
         return (
           <div
@@ -174,7 +173,7 @@ class CartasPokemon extends Component {
                       inverted
                       content={`
                       Loading...${parseInt(porci)}%
-                      ${myList.length} de ${limite}
+                      ${myList[0].length} de ${limite}
                       `}
                     />
                   </Dimmer>
