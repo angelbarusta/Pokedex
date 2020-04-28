@@ -3,7 +3,7 @@ const reducer = (state, actions) => {
     case "SET_LIST":
       return {
         ...state,
-        myList: [...state.myList, actions.payload],
+        myList: [actions.payload],
       };
     case "SET_POKEMON":
       return {

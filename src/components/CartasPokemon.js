@@ -30,14 +30,15 @@ class CartasPokemon extends Component {
       species: [],
       loading: false,
       porceLoad: 0,
-      limite: 11,
+      limite: 20,
       visible: true,
     };
   }
 
   componentWillMount() {
-    this.fetchAsync();
-    if (this.state.lista.length == this.state.limite) {
+    if (this.props.myList.length == 0) {
+      this.fetchAsync();
+    } else if (this.props.myList.length >= this.state.limite) {
       this.loadingFinish();
     }
   }
@@ -53,37 +54,42 @@ class CartasPokemon extends Component {
   };
 
   fetchData = () => {
-    if (this.props.myList.length < this.state.limite) {
-      //`${URL}?limit=${this.state.limite}/`
+    if (this.state.lista.length === 0) {
       fetch(`${URL}?limit=${this.state.limite}/`)
         .then((response) => response.json())
         .then((data) => {
           data.results.map((item) => {
             fetch(item.url)
               .then((response) => response.json())
-              .then(async (allpokemon) => await arr.push(allpokemon))
+              .then((allpokemon) => arr.push(allpokemon))
+              .then(() => {
+                this.setState({
+                  lista: arr,
+                });
+              })
               .then(() => {
                 this.props.Lista(arr);
               })
               .then(() => {
-                if (this.props.myList.length >= this.state.limite) {
+                if (this.state.lista.length >= this.state.limite) {
                   this.loadingFinish();
                 } else {
                   this.setState({
                     loading: true,
-                    porceLoad: `${
-                      (this.props.myList.length * 100) / this.state.limite
-                    }%`,
                   });
                 }
-              });
+              })
+              .catch((err) => console.error(err));
           });
         })
+
         .catch((err) => console.error(err));
     }
   };
 
   loadingFinish = () => {
+    // this.props.Lista(this.state.lista);
+
     this.setState({ loading: false, visible: !this.state.visible });
   };
 
@@ -92,7 +98,6 @@ class CartasPokemon extends Component {
       .then((response) => {
         return response.json();
       })
-
       .then((data) => {
         this.props.SelectPokemon(data);
       })
@@ -153,6 +158,8 @@ class CartasPokemon extends Component {
           var ColorBackgraund = "gray";
         }
 
+        var porci = (myList.length * 100) / this.state.limite;
+
         return (
           <div
             key={i}
@@ -166,8 +173,8 @@ class CartasPokemon extends Component {
                     <Loader
                       inverted
                       content={`
-                      Loading...${parseInt(porceLoad)}%
-                      ${lista.length} de ${limite}
+                      Loading...${parseInt(porci)}%
+                      ${myList.length} de ${limite}
                       `}
                     />
                   </Dimmer>
