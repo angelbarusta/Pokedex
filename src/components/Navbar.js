@@ -16,6 +16,13 @@ const handleResetColorB = (props) => {
 
 export const Navbar = (props) => {
   const { myList, colorBackground } = props;
+  if (colorBackground == "transparent") {
+    var iconNavMenu = "bars";
+    var colorLike = "black";
+  } else {
+    var iconNavMenu = "like";
+    var colorLike = "white";
+  }
 
   return (
     <div className='Navbar' style={{ background: colorBackground }}>
@@ -25,6 +32,7 @@ export const Navbar = (props) => {
         onClick={(e) => handleResetColorB(e)}>
         <Icon
           name='arrow left'
+          style={{ color: colorLike }}
           className='Navbar__brand-back'
           width={30}
           height={30}
@@ -32,7 +40,8 @@ export const Navbar = (props) => {
       </Link>
       <Link className='Navbar__brand' to='/'>
         <Icon
-          name='bars'
+          name={iconNavMenu}
+          style={{ color: colorLike }}
           className='Navbar__brand-menu'
           width={30}
           height={30}
