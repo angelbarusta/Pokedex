@@ -10,6 +10,11 @@ const reducer = (state, actions) => {
         ...state,
         selectPoke: actions.payload,
       };
+    case "SET_COLORBACK":
+      return {
+        ...state,
+        colorBackground: actions.payload,
+      };
     default:
       //regresamos el estado si todo falla
       return state;

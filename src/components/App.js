@@ -7,10 +7,12 @@ import Home from "../pages/Home";
 import Pokemon from "../pages/Pokemon";
 import NotFound from "../components/NotFound";
 
-const App = ({ selectPoke }) => {
+const App = ({ selectPoke, colorBackground }) => {
+  if (selectPoke.name) {
+  }
   return (
     <BrowserRouter>
-      <Layout>
+      <Layout style={{ background: colorBackground }}>
         <Switch>
           <Route exact path='/' component={Home} />
           <Route
@@ -28,6 +30,7 @@ const App = ({ selectPoke }) => {
 const mapStateToProps = (state) => {
   return {
     selectPoke: state.selectPoke,
+    colorBackground: state.colorBackground,
   };
 };
 

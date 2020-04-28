@@ -11,6 +11,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const initialState = {
   myList: [],
   selectPoke: [],
+  colorBackground: "transparent",
 };
 console.log("initialState :", initialState);
 //este es el store e redux

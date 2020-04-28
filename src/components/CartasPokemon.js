@@ -11,7 +11,7 @@ import {
   Transition,
 } from "semantic-ui-react";
 
-import { Lista, SelectPokemon } from "../redux/actions";
+import { Lista, SelectPokemon, ColorBack } from "../redux/actions";
 import "../components/styles/CartasPokemon.css";
 
 const URL = `https://pokeapi.co/api/v2/pokemon/`;
@@ -30,7 +30,7 @@ class CartasPokemon extends Component {
       species: [],
       loading: false,
       porceLoad: 0,
-      limite: 100,
+      limite: 10,
       visible: true,
     };
   }
@@ -92,7 +92,7 @@ class CartasPokemon extends Component {
     this.setState({ loading: false, visible: !this.state.visible });
   };
 
-  fetchDataSingle = (i, name) => {
+  fetchDataSingle = (i, name, ColorBackgraund) => {
     fetch(`${URL}${i}/`)
       .then((response) => {
         return response.json();
@@ -100,6 +100,7 @@ class CartasPokemon extends Component {
       .then((data) => {
         this.props.SelectPokemon(data);
       })
+      .then(() => this.props.ColorBack(ColorBackgraund))
       .then(() => {
         this.props.history.push(`/pokemon/${name}`);
       })
@@ -162,7 +163,9 @@ class CartasPokemon extends Component {
         return (
           <div
             key={i}
-            onClick={(e) => this.fetchDataSingle(item.id, item.name)}
+            onClick={(e) =>
+              this.fetchDataSingle(item.id, item.name, ColorBackgraund)
+            }
             style={{ background: ColorBackgraund }}
             className='Galeria__Cards'>
             {loading ? (
@@ -252,6 +255,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   Lista,
   SelectPokemon,
+  ColorBack,
 };
 export default connect(
   mapStateToProps,

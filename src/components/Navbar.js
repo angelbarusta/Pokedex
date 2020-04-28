@@ -4,15 +4,25 @@ import { connect } from "react-redux";
 
 import "./styles/Navbar.css";
 
+import { ColorBack } from "../redux/actions";
+
 import logo from "../images/az-nuevo_circular.png";
 import { Icon } from "semantic-ui-react";
 // import { Icon } from "semantic-ui-react";
 
+const handleResetColorB = (props) => {
+  props.ColorBack("transparent");
+};
+
 export const Navbar = (props) => {
-  const { myList } = props;
+  const { myList, colorBackground } = props;
+
   return (
-    <div className='Navbar'>
-      <Link className='Navbar__brand' to='/'>
+    <div className='Navbar' style={{ background: colorBackground }}>
+      <Link
+        className='Navbar__brand'
+        to='/'
+        onClick={(e) => handleResetColorB(e)}>
         <Icon
           name='arrow left'
           className='Navbar__brand-back'
@@ -35,7 +45,12 @@ export const Navbar = (props) => {
 const mapStateToProps = (state) => {
   return {
     myList: state.myList,
+    colorBackground: state.colorBackground,
   };
 };
 
-export default connect(mapStateToProps, null)(Navbar);
+const mapDispatchToProps = {
+  ColorBack,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
