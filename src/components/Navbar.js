@@ -13,7 +13,6 @@ import { Icon } from "semantic-ui-react";
 const handleResetColorB = (props) => {
   event.preventDefault();
   props.ColorBack("transparent");
-  console.log("CLIK :>> ");
 };
 
 export const Navbar = (props) => {
@@ -40,7 +39,10 @@ export const Navbar = (props) => {
           height={30}
         />
       </Link>
-      <Link className='Navbar__brand' to='/'>
+      <Link
+        className='Navbar__brand'
+        to='/addLike'
+        onClick={(e) => handleResetColorB(props)}>
         <Icon
           name={iconNavMenu}
           style={{ color: colorLike }}
