@@ -1,0 +1,91 @@
+.Galeria{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-template-rows: 1fr;
+    margin: 0;
+    padding: 0;
+}
+
+.Galeria__Cards{
+    display: flex;
+    margin: 10px;
+    border-radius: 10%;
+    cursor: pointer;
+}
+.Galeria__Cards:hover{
+    display: flex;
+    margin: 15px;
+    border: solid 1px white;
+    cursor: pointer;
+}
+.Galeria__Cards--Content{
+    display: flex;
+    justify-content: space-around;
+}
+.Galeria__Cards--Content h1{
+   color: white;
+   font-size: 25px;
+}
+.Galeria__Cards--Items{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+.Galeria__Cards--image{
+    margin: auto;
+    min-width: 90px;
+  }
+.Galeria__Cards--Labels{
+    background: transparent;
+    border-radius: 29%;
+    color: white;
+    margin: auto;
+    margin-bottom: 10px;
+    padding: 3px;
+    font-size: 12px;
+    border: solid 1px white;
+    opacity: 55%;
+}
+
+
+
+@media screen and (max-width:768px){
+    .Galeria{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        grid-template-rows: 1fr;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .Galeria__Cards{
+        display: flex;
+        margin: 10px;
+        border-radius: 10%;
+    }
+    .Galeria__Cards:hover{
+        display: flex;
+        margin: 12px;
+        border: solid 1px white;
+    }
+ 
+    .Galeria__Cards--Content h1{
+        color: white;
+        font-size: 15px;
+     }
+     .Galeria__Cards--Items{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        align-content: space-around;
+        padding: 10px;
+    }
+    .Galeria__Cards--image{
+        margin: auto;
+        min-width: 0px;
+      }
+  
+  
+    
+}
+

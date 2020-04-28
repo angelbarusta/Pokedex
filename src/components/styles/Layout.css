@@ -1,0 +1,5 @@
+.Conteiner{
+    background: url("../../images/pokemon.jpg") no-repeat fixed left top;
+    position: fixed;
+    top: 50px;
+}

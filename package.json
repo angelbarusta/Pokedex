@@ -1,0 +1,70 @@
+{
+  "name": "pokedex",
+  "version": "1.0.0",
+  "description": "pokedex api",
+  "main": "index.js",
+  "scripts": {
+    "server": "json-server --port 3001 --watch server/db.json --static ./dist",
+    "seed": "node server/seed.js",
+    "start": "webpack-dev-server --config ./webpack.dev.config.js --mode development",
+    "build": "webpack --config ./webpack.config.js --mode production",
+    "build:dll": "webpack --config ./webpack.dll.config.js --mode production"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.9.9",
+    "@material-ui/icons": "^4.9.1",
+    "bootstrap": "^4.3.1",
+    "fetch": "^1.1.0",
+    "react": "16.8.3",
+    "react-dom": "16.8.3",
+    "react-router-dom": "4.3.1",
+    "xmlhttprequest": "1.8.0",
+    "react-router": "^5.1.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "@babel/preset-react": "^7.9.4",
+    "@babel/runtime": "^7.9.2",
+    "add-asset-html-webpack-plugin": "^3.1.3",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.4.2",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.19.0",
+    "faker": "^4.1.0",
+    "file-loader": "^6.0.0",
+    "history": "4.10.1",
+    "html-webpack-plugin": "^4.0.4",
+    "json-server": "0.14.2",
+    "md5": "^2.2.1",
+    "mini-css-extract-plugin": "^0.9.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "react-redux": "^7.2.0",
+    "react-router": "^5.1.2",
+    "redux": "^4.0.5",
+    "semantic-ui-react": "^0.88.2",
+    "style-loader": "^1.1.3",
+    "terser-webpack-plugin": "^2.3.5",
+    "url-loader": "^4.0.0",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3",
+    "xmlhttprequest": "1.8.0"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "keywords": [
+    "pokedex"
+  ],
+  "author": "@angel",
+  "license": "ISC"
+}
