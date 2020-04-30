@@ -36,5 +36,24 @@ justify-content: center;
 
 .DetallesPoke__Container--PhotoPoke{
 max-width: 200px;
-height: auto;
+position: relative;
+top: 30px;
+}
+
+.DetallesPoke__Container--DataEstadistic{
+background-color: white;
+padding: 40px 5px 0px 5px;
+border-radius: 5%;
+}
+
+.DetallesPoke__Container--DataEstadistic header{
+display: flex;
+justify-content: space-between;
+margin: 0px 10px 0px 10px;
+color: black;
+}
+
+.NavDetallesPoke__Container--Menu{
+    display: flex;
+    justify-content: space-between;
 }

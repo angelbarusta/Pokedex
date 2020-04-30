@@ -30,7 +30,7 @@ class CartasPokemon extends Component {
       species: [],
       loading: false,
       porceLoad: 0,
-      limite: 100,
+      limite: 10,
       visible: true,
     };
   }

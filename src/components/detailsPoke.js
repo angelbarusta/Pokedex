@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import "../components/styles/DetallesPoke.css";
+import NavDetailsPoke from "./NavDetailsPoke";
 
 const DetailsPoke = ({ selectPoke }) => {
   var tipos = selectPoke.types.map((t) => {
@@ -77,21 +78,8 @@ const DetailsPoke = ({ selectPoke }) => {
           alt='PokePhot'
         />
       </section>
-      <section>
-        <header>
-          <p>uno</p>
-          <p>dos</p>
-          <p>tre</p>
-          <p>cuatre</p>
-        </header>
-        <section>
-          <div>uno</div>
-          <div>dos</div>
-        </section>
-        <section>
-          <div>uno</div>
-          <div>dos</div>
-        </section>
+      <section className='DetallesPoke__Container--DataEstadistic'>
+        <NavDetailsPoke />
       </section>
     </div>
   );
