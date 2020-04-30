@@ -50,14 +50,16 @@ const DetailsPoke = ({ selectPoke }) => {
       className='DetallesPoke__Container'
       style={{ background: ColorBackgraund }}>
       <header>
-        <h1>{selectPoke.name}</h1>
-        {selectPoke.id < 100 && selectPoke.id >= 10 ? (
-          <p>#0{selectPoke.id}</p>
-        ) : selectPoke.id < 10 ? (
-          <p>#00{selectPoke.id}</p>
-        ) : (
-          <p>#{selectPoke.id}</p>
-        )}
+        <section>
+          <h1>{selectPoke.name}</h1>
+          {selectPoke.id < 100 && selectPoke.id >= 10 ? (
+            <p>#0{selectPoke.id}</p>
+          ) : selectPoke.id < 10 ? (
+            <p>#00{selectPoke.id}</p>
+          ) : (
+            <p>#{selectPoke.id}</p>
+          )}
+        </section>
         <div>
           {selectPoke.types.map((s) => {
             return <p>{s.type.name}</p>;

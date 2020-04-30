@@ -1,3 +1,21 @@
 .DetallesPoke__Container header{
-color:white
+color:white;
+padding: 10px;
+}
+.DetallesPoke__Container header section{
+display: flex;
+justify-content: space-between;
+margin: 10px;
+}
+.DetallesPoke__Container header section p{
+position: absolute;
+top: 100px;
+right: 20px;
+}
+.DetallesPoke__Container header div{
+display: flex;
+justify-content: flex-start;
+}
+.DetallesPoke__Container header div p{
+margin: 10px;
 }
