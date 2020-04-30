@@ -15,7 +15,26 @@ right: 20px;
 .DetallesPoke__Container header div{
 display: flex;
 justify-content: flex-start;
+height: 30px;
+margin-left: 5px;
+}
+.DetallesPoke__Container--TypesData{
+border: 1px solid;
+border-radius: 30%;
+align-items: center;
+margin-right: 10px;
 }
 .DetallesPoke__Container header div p{
 margin: 10px;
+
+}
+
+.DetallesPoke__Container--Container_PhotoPoke{
+display: flex;
+justify-content: center;
+}
+
+.DetallesPoke__Container--PhotoPoke{
+max-width: 200px;
+height: auto;
 }

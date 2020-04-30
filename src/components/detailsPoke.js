@@ -62,12 +62,17 @@ const DetailsPoke = ({ selectPoke }) => {
         </section>
         <div>
           {selectPoke.types.map((s) => {
-            return <p>{s.type.name}</p>;
+            return (
+              <div className='DetallesPoke__Container--TypesData'>
+                <p>{s.type.name}</p>
+              </div>
+            );
           })}
         </div>
       </header>
-      <section>
+      <section className='DetallesPoke__Container--Container_PhotoPoke'>
         <img
+          className='DetallesPoke__Container--PhotoPoke'
           src={`https://pokeres.bastionbot.org/images/pokemon/${selectPoke.id}.png`}
           alt='PokePhot'
         />
