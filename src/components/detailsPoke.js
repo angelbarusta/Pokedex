@@ -18,7 +18,7 @@ class DetailsPoke extends Component {
   render() {
     const { selectPoke } = this.props;
     const { limite, visible, loading } = this.state;
-    var Pokemon = [selectPoke];
+    var Pokemon = [[selectPoke]];
     var porci = Pokemon.length * 100;
 
     // if (selectPoke.length > 0) {
@@ -26,7 +26,7 @@ class DetailsPoke extends Component {
     // }
     setTimeout(
       () => this.setState({ loading: false, visible: !this.state.visible }),
-      3000
+      2000
     );
 
     var tipos = selectPoke.types.map((t) => {
