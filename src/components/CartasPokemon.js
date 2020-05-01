@@ -11,6 +11,7 @@ import {
   Transition,
 } from "semantic-ui-react";
 
+import LoaderComponent from "./LoaderComponent";
 import { Lista, SelectPokemon, ColorBack } from "../redux/actions";
 import "../components/styles/CartasPokemon.css";
 
@@ -30,7 +31,7 @@ class CartasPokemon extends Component {
       species: [],
       loading: false,
       porceLoad: 0,
-      limite: 10,
+      limite: 100,
       visible: true,
     };
   }
@@ -169,27 +170,12 @@ class CartasPokemon extends Component {
             style={{ background: ColorBackgraund }}
             className='Galeria__Cards'>
             {loading ? (
-              <div style={{ width: 290, height: 222 }}>
-                <Segment style={{ width: 290, height: 222 }}>
-                  <Dimmer active inverted>
-                    <Loader
-                      inverted
-                      content={`
-                      Loading...${parseInt(porci)}%
-                      ${myList[0].length} de ${limite}
-                      `}
-                    />
-                  </Dimmer>
-                  <Transition
-                    visible={visible}
-                    animation='jiggle'
-                    duration={200}>
-                    <div className='Galeria__Cards--image'>
-                      <Image src='/images/wireframe/short-paragraph.png' />
-                    </div>
-                  </Transition>
-                </Segment>
-              </div>
+              <LoaderComponent
+                Lista={myList}
+                porciento={porci}
+                limite={limite}
+                visible={visible}
+              />
             ) : (
               <>
                 <div className='Galeria__Cards--Content'>
