@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { createStore, compose } from "redux";
 import { Provider } from "react-redux";
+import { browserHistory } from "react-router";
 
 import reducer from "./redux/reducer";
 import App from "./components/App";
@@ -22,7 +23,7 @@ const container = document.getElementById("app");
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <App history={browserHistory} />
   </Provider>,
   container
 );

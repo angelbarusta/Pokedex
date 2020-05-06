@@ -21,9 +21,6 @@ class DetailsPoke extends Component {
     var Pokemon = [[selectPoke]];
     var porci = Pokemon.length * 100;
 
-    // if (selectPoke.length > 0) {
-    //   this.setState({ loading: false, visible: !this.state.visible });
-    // }
     setTimeout(
       () => this.setState({ loading: false, visible: !this.state.visible }),
       2000
