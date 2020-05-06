@@ -120,44 +120,32 @@ class CartasPokemon extends Component {
         var tipos = item.types.map((t) => {
           return t.type.name;
         });
+        let ultimoType = tipos[tipos.length - 1];
+        let ColoresBack = {
+          fire: "#f74c4c",
+          water: "rgb(48, 178, 241)",
+          grass: "#039a8c",
+          bug: "#8bf571",
+          poison: "#b501d6",
+          electric: "#fbdd08",
+          ground: "#c78153",
+          fairy: "#ffb8e0",
+          flying: "#bcb8ff",
+          ghost: "#3f2080",
+          fighting: "#f57b2a",
+          psychic: "#ff00bc",
+          rock: "#cac4c4",
+          ice: "#0ef5df",
+          dark: "#291e1e",
+          steel: "#ece9e9",
+          dragon: "#806698",
+          normal: "gray",
+        };
 
-        if (tipos[tipos.length - 1] == "fire") {
-          var ColorBackgraund = "#f74c4c";
-        } else if (tipos[tipos.length - 1] == "water") {
-          var ColorBackgraund = "rgb(48, 178, 241)";
-        } else if (tipos[tipos.length - 1] == "grass") {
-          var ColorBackgraund = "#039a8c";
-        } else if (tipos[tipos.length - 1] == "bug") {
-          var ColorBackgraund = "#8bf571";
-        } else if (tipos[tipos.length - 1] == "poison") {
-          var ColorBackgraund = "#b501d6";
-        } else if (tipos[tipos.length - 1] == "electric") {
-          var ColorBackgraund = "#fbdd08";
-        } else if (tipos[tipos.length - 1] == "ground") {
-          var ColorBackgraund = "#c78153";
-        } else if (tipos[tipos.length - 1] == "fairy") {
-          var ColorBackgraund = "#ffb8e0";
-        } else if (tipos[tipos.length - 1] == "flying") {
-          var ColorBackgraund = "#bcb8ff";
-        } else if (tipos[tipos.length - 1] == "ghost") {
-          var ColorBackgraund = "#3f2080";
-        } else if (tipos[tipos.length - 1] == "fighting") {
-          var ColorBackgraund = "#f57b2a";
-        } else if (tipos[tipos.length - 1] == "psychic") {
-          var ColorBackgraund = "#ff00bc";
-        } else if (tipos[tipos.length - 1] == "rock") {
-          var ColorBackgraund = "#cac4c4";
-        } else if (tipos[tipos.length - 1] == "ice") {
-          var ColorBackgraund = "#0ef5df";
-        } else if (tipos[tipos.length - 1] == "dark") {
-          var ColorBackgraund = "#291e1e";
-        } else if (tipos[tipos.length - 1] == "steel") {
-          var ColorBackgraund = "#ece9e9";
-        } else if (tipos[tipos.length - 1] == "dragon") {
-          var ColorBackgraund = "#806698";
-        } else {
-          var ColorBackgraund = "gray";
-        }
+        const colorBack = (type, Colores) => {
+          let Color = Colores[type];
+          return Color;
+        };
 
         var porci = (lista.length * 100) / this.state.limite;
 
@@ -165,9 +153,13 @@ class CartasPokemon extends Component {
           <div
             key={i}
             onClick={(e) =>
-              this.fetchDataSingle(item.id, item.name, ColorBackgraund)
+              this.fetchDataSingle(
+                item.id,
+                item.name,
+                colorBack(ultimoType, ColoresBack)
+              )
             }
-            style={{ background: ColorBackgraund }}
+            style={{ background: colorBack(ultimoType, ColoresBack) }}
             className='Galeria__Cards'>
             {loading ? (
               <LoaderComponent
