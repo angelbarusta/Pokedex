@@ -52,10 +52,7 @@ class DetailsPoke extends Component {
       normal: "gray",
     };
 
-    const colorBack = (type, Colores) => {
-      let Color = Colores[type];
-      return Color;
-    };
+    const colorBack = (type, Colores) => Colores[type];
 
     return (
       <div
@@ -99,7 +96,7 @@ class DetailsPoke extends Component {
           )}
         </section>
         <section className='DetallesPoke__Container--DataEstadistic'>
-          <NavDetailsPoke />
+          <NavDetailsPoke poke={selectPoke} />
         </section>
       </div>
     );

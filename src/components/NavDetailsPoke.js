@@ -1,5 +1,9 @@
 import React, { Component } from "react";
+
 import { Menu, Segment } from "semantic-ui-react";
+import { InfoPokeData } from "./infoPokeData";
+
+import "./styles/DetallesPoke.css";
 
 export default class NavDetailsPoke extends Component {
   state = { activeItem: "About" };
@@ -8,7 +12,7 @@ export default class NavDetailsPoke extends Component {
 
   render() {
     const { activeItem } = this.state;
-
+    const { poke } = this.props;
     return (
       <div className='NavDetallesPoke__Container'>
         <Menu pointing secondary className='NavDetallesPoke__Container--Menu'>
@@ -34,11 +38,8 @@ export default class NavDetailsPoke extends Component {
           />
         </Menu>
 
-        <Segment>
-          <img
-            style={{ maxWidth: 200 }}
-            src='https://react.semantic-ui.com/images/wireframe/media-paragraph.png'
-          />
+        <Segment className='NavDetallesPoke__Container--SegmentDetails'>
+          <InfoPokeData poke={poke} mode={activeItem} />
         </Segment>
       </div>
     );

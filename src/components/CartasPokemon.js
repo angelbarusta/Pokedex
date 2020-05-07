@@ -142,10 +142,7 @@ class CartasPokemon extends Component {
           normal: "gray",
         };
 
-        const colorBack = (type, Colores) => {
-          let Color = Colores[type];
-          return Color;
-        };
+        const colorBack = (type, Colores) => Colores[type];
 
         var porci = (lista.length * 100) / this.state.limite;
 

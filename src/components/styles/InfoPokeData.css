@@ -1,0 +1,12 @@
+.Informacion__Container{
+    width: 100%;
+    overflow: auto;
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+.Informacion__Container div p{
+    display: grid;
+    grid-template-columns: .5fr 2fr;
+    grid-gap: 15px;
+}

@@ -57,3 +57,8 @@ color: black;
     display: flex;
     justify-content: space-between;
 }
+.NavDetallesPoke__Container--SegmentDetails{
+    overflow: auto;
+    height: 93vh;
+    overflow-y: scroll;
+}
