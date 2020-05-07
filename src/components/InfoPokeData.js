@@ -1,12 +1,17 @@
 import React from "react";
 
 import "../components/styles/InfoPokeData.css";
+import ProgressData from "./ProgressData";
 
 export const InfoPokeData = ({ poke, mode }) => {
   return (
     <div className='Informacion__Container'>
       {mode == "Base Stats" ? (
-        <div>Base Stats</div>
+        <div>
+          <p>
+            Hp <ProgressData valor={poke.height} porci={poke.height} />
+          </p>
+        </div>
       ) : mode == "Evolution" ? (
         <div>Evolution</div>
       ) : mode == "Moves" ? (
@@ -27,7 +32,7 @@ export const InfoPokeData = ({ poke, mode }) => {
             Weigth <h4>{poke.weight}cm</h4>
           </p>
           <p>
-            BaseExperiencia <h4>{poke.base_experience}pts</h4>
+            Experiencia <h4>{poke.base_experience}pts</h4>
           </p>
           <p>
             Orden <h4>#{poke.order}</h4>
