@@ -31,7 +31,7 @@ class CartasPokemon extends Component {
       species: [],
       loading: false,
       porceLoad: 0,
-      limite: 50,
+      limite: 10,
       visible: true,
     };
   }
@@ -120,6 +120,7 @@ class CartasPokemon extends Component {
         var tipos = item.types.map((t) => {
           return t.type.name;
         });
+
         let ultimoType = tipos[tipos.length - 1];
         let ColoresBack = {
           fire: "#f74c4c",

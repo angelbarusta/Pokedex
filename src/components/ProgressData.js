@@ -1,17 +1,6 @@
 import React from "react";
 import { Progress, Segment } from "semantic-ui-react";
 
-// let colores = {
-//   red: 20,
-//   yellow: 50,
-//   green: 100,
-// };
-
-// let colores = {
-//   20: "red",
-//   50: "yellow",
-//   100: "green",
-// };
 const estadoColor = (val, col) => {
   var color;
   if (val <= 25) {
@@ -27,7 +16,8 @@ const estadoColor = (val, col) => {
 };
 
 const PogressData = ({
-  porcen,
+  poke,
+  porci,
   valor,
   isProgress,
   textLoad,
@@ -44,17 +34,16 @@ const PogressData = ({
           color={estadoColor(porciento)}
           value={porciento}
           total={limite}>
-          {/* {textLoad} */}
           Loading...
         </Progress>
       ) : (
         <Progress
           active
-          progress
-          color={estadoColor(valor, colores)}
-          porcent={valor}
-          total={100}>
-          Active
+          progress='value'
+          value={valor}
+          total={porci}
+          color={estadoColor(porciento)}>
+          Exp
         </Progress>
       )}
     </div>
