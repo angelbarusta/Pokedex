@@ -5,6 +5,8 @@ import "../components/styles/DetallesPoke.css";
 import NavDetailsPoke from "./NavDetailsPoke";
 import LoaderComponent from "./LoaderComponent";
 
+const URL = `https://pokeapi.co/api/v2/pokemon/`;
+
 class DetailsPoke extends Component {
   constructor(props) {
     super(props);
@@ -100,6 +102,9 @@ class DetailsPoke extends Component {
         </section>
       </div>
     );
+  }
+  componentWillUnmount() {
+    this.props.history.push(`/`); //
   }
 }
 

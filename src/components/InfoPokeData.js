@@ -4,19 +4,29 @@ import "../components/styles/InfoPokeData.css";
 import ProgressData from "./ProgressData";
 
 export const InfoPokeData = ({ poke, mode }) => {
-  const altura = poke.height * 10;
-  const ancho = poke.weight / 10;
+  const about = ["id", "name", "height", "weight", "base_experience", "order"];
 
-  // const movimientos = poke.moves.map((item) => {
+  const LisAbout = about.map((item, i) => {
+    var isNum;
+    const isNumero = (item) => (item == "order" ? (isNum = "#") : (isNum = ""));
+    const Up = (txt) => txt[0].toUpperCase() + txt.slice(1);
+    const ValItem = (item) =>
+      item == "height"
+        ? poke[item] * 10
+        : item == "weight"
+        ? poke[item] / 10
+        : poke[item];
 
-  //   var mov = item.move.name;
-  // });
-
-  // var ListaPokemons = myList[0].map((item, i) => {
-  //   var tipos = item.types.map((t) => {
-  //     return t.type.name;
-  //   });
-  // });
+    return (
+      <p>
+        {Up(item)}{" "}
+        <h4>
+          {isNumero(item)}
+          {ValItem(item)}
+        </h4>
+      </p>
+    );
+  });
 
   return (
     <div className='Informacion__Container'>
@@ -42,27 +52,7 @@ export const InfoPokeData = ({ poke, mode }) => {
           ))}
         </div>
       ) : (
-        <div>
-          <p>
-            Id <h4>{poke.id}</h4>
-          </p>
-          <p>
-            Nombre <h4>{poke.name}</h4>
-          </p>
-
-          <p>
-            Height <h4>{altura}cm</h4>
-          </p>
-          <p>
-            Weigth <h4>{ancho}cm</h4>
-          </p>
-          <p>
-            Experiencia <h4>{poke.base_experience}pts</h4>
-          </p>
-          <p>
-            Orden <h4>#{poke.order}</h4>
-          </p>
-        </div>
+        <div>{LisAbout}</div>
       )}
     </div>
   );

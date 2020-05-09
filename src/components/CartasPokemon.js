@@ -16,7 +16,6 @@ import { Lista, SelectPokemon, ColorBack } from "../redux/actions";
 import "../components/styles/CartasPokemon.css";
 
 const URL = `https://pokeapi.co/api/v2/pokemon/`;
-const URL_SINGU = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/`;
 var arr = [];
 
 class CartasPokemon extends Component {
@@ -67,9 +66,15 @@ class CartasPokemon extends Component {
                 lista: arr,
               });
             })
-            // .then(() => {
-            //   this.props.Lista(arr);
-            // })
+            .then(() => {
+              fetch(`${URL}${1}/`)
+                .then((response) => {
+                  return response.json();
+                })
+                .then((data) => {
+                  this.props.SelectPokemon(data);
+                });
+            })
             .then(() => {
               if (this.state.lista.length >= this.state.limite) {
                 this.loadingFinish();
@@ -113,7 +118,6 @@ class CartasPokemon extends Component {
     const { myList } = this.props;
     console.log("REDUCER :", this.props);
     console.log("state :", this.state);
-    // console.log("lista :", lista);
 
     if (myList.length > 0) {
       var ListaPokemons = myList[0].map((item, i) => {
