@@ -15,6 +15,11 @@ const reducer = (state, actions) => {
         ...state,
         colorBackground: actions.payload,
       };
+    case "SET_EVO_POKE":
+      return {
+        ...state,
+        evolucionesPoke: actions.payload,
+      };
     default:
       //regresamos el estado si todo falla
       return state;

@@ -12,7 +12,7 @@ export default class NavDetailsPoke extends Component {
 
   render() {
     const { activeItem } = this.state;
-    const { poke } = this.props;
+    const { poke, evo } = this.props;
     return (
       <div className='NavDetallesPoke__Container'>
         <Menu pointing secondary className='NavDetallesPoke__Container--Menu'>
@@ -39,7 +39,7 @@ export default class NavDetailsPoke extends Component {
         </Menu>
 
         <Segment className='NavDetallesPoke__Container--SegmentDetails'>
-          <InfoPokeData poke={poke} mode={activeItem} />
+          <InfoPokeData poke={poke} mode={activeItem} evo={evo} />
         </Segment>
       </div>
     );

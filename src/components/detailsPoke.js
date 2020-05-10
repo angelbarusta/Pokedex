@@ -4,8 +4,10 @@ import { connect } from "react-redux";
 import "../components/styles/DetallesPoke.css";
 import NavDetailsPoke from "./NavDetailsPoke";
 import LoaderComponent from "./LoaderComponent";
+import { addEvoPoke } from "../redux/actions";
 
 const URL = `https://pokeapi.co/api/v2/pokemon/`;
+const URL_EVOLUCION = `https://pokeapi.co/api/v2/pokemon-species/`; //https://pokeapi.co/api/v2/pokemon-species/4/
 
 class DetailsPoke extends Component {
   constructor(props) {
@@ -17,8 +19,59 @@ class DetailsPoke extends Component {
     };
   }
 
-  render() {
+  componentWillMount() {
     const { selectPoke } = this.props;
+    const id = selectPoke.id;
+    this.fetchAsync(id);
+  }
+
+  fetchAsync = async (id) => {
+    try {
+      const data1 = await this.fetchData(id);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  fetchData = (id) => {
+    fetch(`${URL_EVOLUCION}${id}/`)
+      .then((response) => response.json())
+      .then((data) => {
+        fetch(data.evolution_chain.url)
+          .then((response) => response.json())
+          .then((dat) => {
+            let arrEvo = dat.chain.evolves_to;
+            let evos = arrEvo.map((item) => item);
+
+            var evo1 = dat.chain.species.name;
+            let arrEvolu = [evo1];
+            //console.log("DAT", evo1);
+            //console.log("DATo", dat.chain.evolves_to);
+            if (evos[0]) {
+              var evo2 = evos[0].species.name;
+              arrEvolu.push(evo2);
+              //console.log("DAT2", evo2);
+              if (evo2[0]) {
+                var evo3 = evos[0].evolves_to[0].species.name;
+                arrEvolu.push(evo3);
+                //console.log("DAT3", evo3);
+              }
+            }
+            console.log("DAT5", arrEvolu);
+            this.props.addEvoPoke(arrEvolu);
+          });
+      })
+      // .then((data) => {
+      //   console.log("DATA", data.chain.evolves_to);
+      //   this.props.addEvoPoke(data.chain.evolves_to);
+      // })
+      .catch((err) => {
+        console.error("ERROR_API_EVOLUCION", err);
+      });
+  };
+
+  render() {
+    const { selectPoke, evolucionesPoke } = this.props;
     const { limite, visible, loading } = this.state;
     var Pokemon = [[selectPoke]];
     var porci = Pokemon.length * 100;
@@ -72,9 +125,9 @@ class DetailsPoke extends Component {
             )}
           </section>
           <div>
-            {selectPoke.types.map((s) => {
+            {selectPoke.types.map((s, i) => {
               return (
-                <div className='DetallesPoke__Container--TypesData'>
+                <div key={i} className='DetallesPoke__Container--TypesData'>
                   <p>{s.type.name}</p>
                 </div>
               );
@@ -98,19 +151,20 @@ class DetailsPoke extends Component {
           )}
         </section>
         <section className='DetallesPoke__Container--DataEstadistic'>
-          <NavDetailsPoke poke={selectPoke} />
+          <NavDetailsPoke poke={selectPoke} evo={evolucionesPoke} />
         </section>
       </div>
     );
-  }
-  componentWillUnmount() {
-    this.props.history.push(`/`); //
   }
 }
 
 const mapStateToProps = (state) => {
   return {
     selectPoke: state.selectPoke,
+    evolucionesPoke: state.evolucionesPoke,
   };
 };
-export default connect(mapStateToProps, null)(DetailsPoke);
+const mapDispatchToProps = {
+  addEvoPoke,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(DetailsPoke);

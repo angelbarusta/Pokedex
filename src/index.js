@@ -12,6 +12,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const initialState = {
   myList: [],
   selectPoke: [],
+  evolucionesPoke: [],
   colorBackground: "transparent",
 };
 console.log("initialState :", initialState);

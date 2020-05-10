@@ -172,7 +172,7 @@ class CartasPokemon extends Component {
               />
             ) : (
               <>
-                <div className='Galeria__Cards--Content'>
+                <div key={i} className='Galeria__Cards--Content'>
                   <section className='Galeria__Cards--Items'>
                     <h1>
                       {item.name} #{item.id}

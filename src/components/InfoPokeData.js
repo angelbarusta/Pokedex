@@ -3,7 +3,7 @@ import React from "react";
 import "../components/styles/InfoPokeData.css";
 import ProgressData from "./ProgressData";
 
-export const InfoPokeData = ({ poke, mode }) => {
+export const InfoPokeData = ({ poke, mode, evo }) => {
   const about = ["id", "name", "height", "weight", "base_experience", "order"];
 
   const LisAbout = about.map((item, i) => {
@@ -18,7 +18,7 @@ export const InfoPokeData = ({ poke, mode }) => {
         : poke[item];
 
     return (
-      <p>
+      <p key={i}>
         {Up(item)}{" "}
         <h4>
           {isNumero(item)}
@@ -42,11 +42,17 @@ export const InfoPokeData = ({ poke, mode }) => {
           </p>
         </div>
       ) : mode == "Evolution" ? (
-        <div>Evolution</div>
+        <div>
+          {evo.map((item, i) => (
+            <p key={i}>
+              {i + 1} <h4>{item}</h4>
+            </p>
+          ))}
+        </div>
       ) : mode == "Moves" ? (
         <div>
           {poke.moves.map((item, i) => (
-            <p>
+            <p key={i}>
               {i + 1} <h4>{item.move.name}</h4>
             </p>
           ))}

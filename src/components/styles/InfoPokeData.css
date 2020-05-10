@@ -1,8 +1,8 @@
 .Informacion__Container{
     width: 100%;
-    overflow: auto;
+    /* overflow: auto;
     height: 100vh;
-    overflow-y: scroll;
+    overflow-y: scroll; */
 }
 
 .Informacion__Container div p{
