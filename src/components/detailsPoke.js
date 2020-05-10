@@ -44,27 +44,25 @@ class DetailsPoke extends Component {
             let evos = arrEvo.map((item) => item);
 
             var evo1 = dat.chain.species.name;
-            let arrEvolu = [evo1];
-            //console.log("DAT", evo1);
-            //console.log("DATo", dat.chain.evolves_to);
+            var arrEvolu = [evo1];
+
             if (evos[0]) {
               var evo2 = evos[0].species.name;
               arrEvolu.push(evo2);
-              //console.log("DAT2", evo2);
+              this.props.addEvoPoke(arrEvolu);
+
               if (evo2[0]) {
                 var evo3 = evos[0].evolves_to[0].species.name;
                 arrEvolu.push(evo3);
-                //console.log("DAT3", evo3);
+                this.props.addEvoPoke(arrEvolu);
               }
             }
-            console.log("DAT5", arrEvolu);
+
+            console.log("OK0 :>> ", arrEvolu);
             this.props.addEvoPoke(arrEvolu);
+            //console.log("OK0 :>> ", arrEvolu);
           });
       })
-      // .then((data) => {
-      //   console.log("DATA", data.chain.evolves_to);
-      //   this.props.addEvoPoke(data.chain.evolves_to);
-      // })
       .catch((err) => {
         console.error("ERROR_API_EVOLUCION", err);
       });

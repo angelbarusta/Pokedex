@@ -30,7 +30,7 @@ class CartasPokemon extends Component {
       species: [],
       loading: false,
       porceLoad: 0,
-      limite: 10,
+      limite: 20,
       visible: true,
     };
   }
@@ -46,7 +46,6 @@ class CartasPokemon extends Component {
   fetchAsync = async () => {
     try {
       const data1 = await this.fetchData();
-
       const data2 = await this.loadingFinish();
     } catch (error) {
       console.error(error);
