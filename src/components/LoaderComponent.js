@@ -14,7 +14,6 @@ export default function LoaderComponent(props) {
   const { porciento, Lista, limite, visible } = props;
   return (
     <div style={{ width: "100", background: "red" }}>
-      {/* <Card style={{ width: 290, height: 222, background: background }}> */}
       <Dimmer active inverted>
         <Loader
           style={{

@@ -1,9 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import CartasPokemon from "../components/CartasPokemon";
 
-class Home extends Component {
-  render() {
-    return <CartasPokemon />;
-  }
-}
+//const URL = `https://pokeapi.co/api/v2/pokemon/`;
+const URL = `https://pokeapi.co/api/v2/`;
+const Home = () => <CartasPokemon url={URL} />;
 export default Home;

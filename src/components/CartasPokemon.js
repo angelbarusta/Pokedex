@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Component } from "react";
+import React, { useState, useEffect } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { withRouter } from "react-router-dom";
 import {
@@ -15,17 +15,13 @@ import LoaderComponent from "./LoaderComponent";
 import { Lista, SelectPokemon, ColorBack } from "../redux/actions";
 import "../components/styles/CartasPokemon.css";
 
-const URL = `https://pokeapi.co/api/v2/pokemon/`;
 var arr = [];
 
-const CartasPokemon = ({ history }) => {
+const CartasPokemon = ({ url, history }) => {
   const [LISTA, setLISTA] = useState([]);
-  const [POKEINFO, setPOKEINFO] = useState([]);
   const [LIMITE, setLIMITE] = useState(20);
   const [LOADING, setLOADING] = useState(true);
-  const [TYPE, setTYPE] = useState([]);
   const [VISIBLE, setVISIBLE] = useState(true);
-  const [PORCELOAD, setPORCELOAD] = useState(0);
   const myList = useSelector((state) => state.myList);
   const dispatch = useDispatch();
 
@@ -35,7 +31,7 @@ const CartasPokemon = ({ history }) => {
       await loadingFinish();
     };
     const fetchData = () => {
-      fetch(`${URL}?limit=${LIMITE}/`)
+      fetch(`${url}pokemon/?limit=${LIMITE}/`)
         .then((response) => response.json())
         .then((data) => {
           data.results.map((item) => {
@@ -44,38 +40,28 @@ const CartasPokemon = ({ history }) => {
               .then((allpokemon) => arr.push(allpokemon))
               .then(() => setLISTA(arr))
               .then(() => {
-                fetch(`${URL}${1}/`)
+                fetch(`${url}pokemon/${1}/`)
                   .then((response) => response.json())
                   .then((data) => dispatch(SelectPokemon(data)));
               })
-              .then(() => {
-                if (myList[0].length >= LIMITE) {
-                  loadingFinish();
-                } else {
-                  setLOADING(true);
-                }
-              })
+              .then(() =>
+                arr.length >= LIMITE ? loadingFinish() : setLOADING(true)
+              )
               .catch((err) => console.error(err));
           });
         })
         .catch((err) => console.error(err));
     };
     const loadingFinish = () => {
-      if (myList.length == 0) {
-        dispatch(Lista(arr));
-      }
+      LISTA.length == 0 && dispatch(Lista(arr));
       setLOADING(false);
       setVISIBLE(!VISIBLE);
     };
-    if (myList.length == 0) {
-      cargar();
-    } else {
-      loadingFinish();
-    }
+    LISTA.length == 0 ? cargar() : loadingFinish();
     //return () =>
-  }, []);
+  }, [url]);
   const fetchDataSingle = (i, name, ColorBackgraund) => {
-    fetch(`${URL}${i}/`)
+    fetch(`${url}pokemon/${i}/`)
       .then((response) => response.json())
       .then((data) => dispatch(SelectPokemon(data)))
       .then(() => dispatch(ColorBack(ColorBackgraund)))
@@ -172,9 +158,8 @@ const CartasPokemon = ({ history }) => {
   } else {
     <div>Loading...</div>;
   }
-
-  console.log("LISTA :>> ", LISTA);
-  console.log("myList :>> ", myList);
+  // console.log("LISTA :>> ", LISTA);
+  // console.log("myList :>> ", myList);
   return (
     <>
       <h1 style={{ marginLeft: 15 }}>Pokedex</h1>
