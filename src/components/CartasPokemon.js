@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { useState, useEffect, Component } from "react";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { withRouter } from "react-router-dom";
 import {
   Card,
@@ -18,225 +18,173 @@ import "../components/styles/CartasPokemon.css";
 const URL = `https://pokeapi.co/api/v2/pokemon/`;
 var arr = [];
 
-class CartasPokemon extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      lista: [],
-      pokeinfo: [],
-      miniaturas: [],
-      type: [],
-      habilidades: [],
-      species: [],
-      loading: false,
-      porceLoad: 0,
-      limite: 20,
-      visible: true,
+const CartasPokemon = ({ history }) => {
+  const [LISTA, setLISTA] = useState([]);
+  const [POKEINFO, setPOKEINFO] = useState([]);
+  const [LIMITE, setLIMITE] = useState([]);
+  const [LOADING, setLOADING] = useState([]);
+  const [TYPE, setTYPE] = useState([]);
+  const [VISIBLE, setVISIBLE] = useState([]);
+  const [PORCELOAD, setPORCELOAD] = useState(0);
+  const myList = useSelector((state) => state.myList);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const cargar = async () => {
+      await fetchData();
+      await loadingFinish();
     };
-  }
-
-  componentWillMount() {
-    if (this.props.myList.length == 0) {
-      this.fetchAsync();
+    const fetchData = () => {
+      fetch(`${URL}?limit=${LIMITE}/`)
+        .then((response) => response.json())
+        .then((data) => {
+          data.results.map((item) => {
+            fetch(item.url)
+              .then((response) => response.json())
+              .then((allpokemon) => arr.push(allpokemon))
+              .then(() => setLISTA(arr))
+              .then(() => {
+                fetch(`${URL}${1}/`)
+                  .then((response) => response.json())
+                  .then((data) => dispatch(SelectPokemon(data)));
+              })
+              .then(() => {
+                if (LISTA.length >= LIMITE) {
+                  loadingFinish();
+                } else {
+                  setLOADING(true);
+                }
+              })
+              .catch((err) => console.error(err));
+          });
+        })
+        .catch((err) => console.error(err));
+    };
+    const loadingFinish = () => {
+      if (myList.length == 0) {
+        dispatch(Lista(arr));
+      }
+      setLOADING(false);
+      setVISIBLE(!VISIBLE);
+    };
+    if (myList.length == 0) {
+      cargar();
     } else {
-      this.loadingFinish();
+      loadingFinish();
     }
-  }
-
-  fetchAsync = async () => {
-    try {
-      const data1 = await this.fetchData();
-      const data2 = await this.loadingFinish();
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  fetchData = () => {
-    fetch(`${URL}?limit=${this.state.limite}/`)
-      .then((response) => response.json())
-      .then((data) => {
-        data.results.map((item) => {
-          fetch(item.url)
-            .then((response) => response.json())
-            .then((allpokemon) => arr.push(allpokemon))
-            .then(() => {
-              this.setState({
-                lista: arr,
-              });
-            })
-            .then(() => {
-              fetch(`${URL}${1}/`)
-                .then((response) => {
-                  return response.json();
-                })
-                .then((data) => {
-                  this.props.SelectPokemon(data);
-                });
-            })
-            .then(() => {
-              if (this.state.lista.length >= this.state.limite) {
-                this.loadingFinish();
-              } else {
-                this.setState({
-                  loading: true,
-                });
-              }
-            })
-            .catch((err) => console.error(err));
-        });
-      })
-
-      .catch((err) => console.error(err));
-  };
-
-  loadingFinish = () => {
-    if (this.props.myList.length == 0) {
-      this.props.Lista(arr);
-    }
-    this.setState({ loading: false, visible: !this.state.visible });
-  };
-
-  fetchDataSingle = (i, name, ColorBackgraund) => {
+    //return () =>
+  }, []);
+  const fetchDataSingle = (i, name, ColorBackgraund) => {
     fetch(`${URL}${i}/`)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        this.props.SelectPokemon(data);
-      })
-      .then(() => this.props.ColorBack(ColorBackgraund))
-      .then(() => {
-        this.props.history.push(`/pokemon/${name}`);
-      })
+      .then((response) => response.json())
+      .then((data) => dispatch(SelectPokemon(data)))
+      .then(() => dispatch(ColorBack(ColorBackgraund)))
+      .then(() => history.push(`/pokemon/${name}`))
       .catch((err) => console.error(err));
   };
 
-  render() {
-    const { lista, loading, visible, porceLoad, limite } = this.state;
-    const { myList } = this.props;
-    console.log("REDUCER :", this.props);
-    console.log("state :", this.state);
+  if (myList.length > 0) {
+    var ListaPokemons = myList[0].map((item, i) => {
+      var tipos = item.types.map((t) => t.type.name);
+      let ultimoType = tipos[0];
+      let ColoresBack = {
+        fire: "#f74c4c",
+        water: "rgb(48, 178, 241)",
+        grass: "#039a8c",
+        bug: "#8bf571",
+        poison: "#b501d6",
+        electric: "#fbdd08",
+        ground: "#c78153",
+        fairy: "#ffb8e0",
+        flying: "#bcb8ff",
+        ghost: "#3f2080",
+        fighting: "#f57b2a",
+        psychic: "#ff00bc",
+        rock: "#cac4c4",
+        ice: "#0ef5df",
+        dark: "#291e1e",
+        steel: "#ece9e9",
+        dragon: "#806698",
+        normal: "gray",
+      };
+      const colorBack = (ultimoType, ColoresBack) => ColoresBack[ultimoType];
+      var porci = (LISTA.length * 100) / LIMITE;
+      return (
+        <div
+          key={i}
+          onClick={(e) =>
+            fetchDataSingle(
+              item.id,
+              item.name,
+              colorBack(ultimoType, ColoresBack)
+            )
+          }
+          style={{ background: colorBack(ultimoType, ColoresBack) }}
+          className='Galeria__Cards'>
+          {LOADING ? (
+            <LoaderComponent
+              Lista={myList}
+              porciento={porci}
+              limite={LIMITE}
+              visible={VISIBLE}
+            />
+          ) : (
+            <>
+              <div key={i} className='Galeria__Cards--Content'>
+                <section className='Galeria__Cards--Items'>
+                  <h1>
+                    {item.name} #{item.id}
+                  </h1>
+                  <Transition
+                    visible={VISIBLE}
+                    animation='jiggle'
+                    duration={200}>
+                    <Image src={item.sprites.front_default} />
+                  </Transition>
+                  <Label
+                    style={{ marginBottom: 5 }}
+                    circular
+                    color='green'
+                    image>
+                    {item.name}
+                  </Label>
 
-    if (myList.length > 0) {
-      var ListaPokemons = myList[0].map((item, i) => {
-        var tipos = item.types.map((t) => {
-          return t.type.name;
-        });
+                  {item.types.map((s) => {
+                    return (
+                      <div className='Galeria__Cards--Labels'>
+                        {s.type.name}
+                      </div>
+                    );
+                  })}
+                </section>
 
-        let ultimoType = tipos[tipos.length - 1];
-        let ColoresBack = {
-          fire: "#f74c4c",
-          water: "rgb(48, 178, 241)",
-          grass: "#039a8c",
-          bug: "#8bf571",
-          poison: "#b501d6",
-          electric: "#fbdd08",
-          ground: "#c78153",
-          fairy: "#ffb8e0",
-          flying: "#bcb8ff",
-          ghost: "#3f2080",
-          fighting: "#f57b2a",
-          psychic: "#ff00bc",
-          rock: "#cac4c4",
-          ice: "#0ef5df",
-          dark: "#291e1e",
-          steel: "#ece9e9",
-          dragon: "#806698",
-          normal: "gray",
-        };
-
-        const colorBack = (type, Colores) => Colores[type];
-
-        var porci = (lista.length * 100) / this.state.limite;
-
-        return (
-          <div
-            key={i}
-            onClick={(e) =>
-              this.fetchDataSingle(
-                item.id,
-                item.name,
-                colorBack(ultimoType, ColoresBack)
-              )
-            }
-            style={{ background: colorBack(ultimoType, ColoresBack) }}
-            className='Galeria__Cards'>
-            {loading ? (
-              <LoaderComponent
-                Lista={myList}
-                porciento={porci}
-                limite={limite}
-                visible={visible}
-              />
-            ) : (
-              <>
-                <div key={i} className='Galeria__Cards--Content'>
-                  <section className='Galeria__Cards--Items'>
-                    <h1>
-                      {item.name} #{item.id}
-                    </h1>
-                    <Transition
-                      visible={visible}
-                      animation='jiggle'
-                      duration={200}>
-                      <Image src={item.sprites.front_default} />
-                    </Transition>
-                    <Label
-                      style={{ marginBottom: 5 }}
-                      circular
-                      color='green'
-                      image>
-                      {item.name}
-                    </Label>
-
-                    {item.types.map((s) => {
-                      return (
-                        <div className='Galeria__Cards--Labels'>
-                          {s.type.name}
-                        </div>
-                      );
-                    })}
-                  </section>
-
-                  <div className='Galeria__Cards--image'>
-                    <Image
-                      src={`https://pokeres.bastionbot.org/images/pokemon/${item.id}.png`}
-                    />
-                  </div>
+                <div className='Galeria__Cards--image'>
+                  <Image
+                    src={`https://pokeres.bastionbot.org/images/pokemon/${item.id}.png`}
+                  />
                 </div>
-              </>
-            )}
-          </div>
-        );
-      });
-    } else {
-      <div>Loading...</div>;
-    }
-
-    return (
-      <>
-        <h1 style={{ marginLeft: 15 }}>Pokedex</h1>
-        {myList.length > 0 ? (
-          <section className='Galeria'>{ListaPokemons}</section>
-        ) : (
-          <section className='Galeria'>Loading...</section>
-        )}
-      </>
-    );
+              </div>
+            </>
+          )}
+        </div>
+      );
+    });
+  } else {
+    <div>Loading...</div>;
   }
-}
-const mapStateToProps = (state) => {
-  return {
-    myList: state.myList,
-  };
+
+  console.log("LISTA :>> ", LISTA);
+  console.log("myList :>> ", myList);
+  return (
+    <>
+      <h1 style={{ marginLeft: 15 }}>Pokedex</h1>
+      {myList.length > 0 ? (
+        <section className='Galeria'>{ListaPokemons}</section>
+      ) : (
+        <section className='Galeria'>Loading...</section>
+      )}
+    </>
+  );
 };
-const mapDispatchToProps = {
-  Lista,
-  SelectPokemon,
-  ColorBack,
-};
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(CartasPokemon));
+
+export default withRouter(CartasPokemon);
