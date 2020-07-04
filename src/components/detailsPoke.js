@@ -57,7 +57,7 @@ const DetailsPoke = () => {
   var porci = Pokemon.length * 100;
   setTimeout(
     () => (setLOADING(false), setVISIBLE(!VISIBLE)), //this.setState({ loading: false, visible: !this.state.visible }),
-    2000
+    1000
   );
   var tipos = selectPoke.types.map((t) => t.type.name);
   let ultimoType = tipos[0];
