@@ -53,11 +53,11 @@ const CartasPokemon = ({ url, history }) => {
         .catch((err) => console.error(err));
     };
     const loadingFinish = () => {
-      LISTA.length == 0 && dispatch(Lista(arr));
+      LISTA.length === 0 && dispatch(Lista(arr));
       setLOADING(false);
       setVISIBLE(!VISIBLE);
     };
-    LISTA.length == 0 ? cargar() : loadingFinish();
+    arr.length === 0 ? cargar() : loadingFinish();
     //return () =>
   }, [url]);
   const fetchDataSingle = (i, name, ColorBackgraund) => {
@@ -158,8 +158,8 @@ const CartasPokemon = ({ url, history }) => {
   } else {
     <div>Loading...</div>;
   }
-  // console.log("LISTA :>> ", LISTA);
-  // console.log("myList :>> ", myList);
+  console.log("LISTA :>> ", LISTA);
+  console.log("myList :>> ", myList);
   return (
     <>
       <h1 style={{ marginLeft: 15 }}>Pokedex</h1>
