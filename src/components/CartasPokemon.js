@@ -15,8 +15,7 @@ import LoaderComponent from "./LoaderComponent";
 import { Lista, SelectPokemon, ColorBack } from "../redux/actions";
 import "../components/styles/CartasPokemon.css";
 
-var arr = [];
-
+const arr = [];
 const CartasPokemon = ({ url, history }) => {
   const [LISTA, setLISTA] = useState([]);
   const [LIMITE, setLIMITE] = useState(20);
