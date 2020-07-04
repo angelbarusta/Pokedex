@@ -21,10 +21,10 @@ var arr = [];
 const CartasPokemon = ({ history }) => {
   const [LISTA, setLISTA] = useState([]);
   const [POKEINFO, setPOKEINFO] = useState([]);
-  const [LIMITE, setLIMITE] = useState([]);
-  const [LOADING, setLOADING] = useState([]);
+  const [LIMITE, setLIMITE] = useState(20);
+  const [LOADING, setLOADING] = useState(true);
   const [TYPE, setTYPE] = useState([]);
-  const [VISIBLE, setVISIBLE] = useState([]);
+  const [VISIBLE, setVISIBLE] = useState(true);
   const [PORCELOAD, setPORCELOAD] = useState(0);
   const myList = useSelector((state) => state.myList);
   const dispatch = useDispatch();
@@ -49,7 +49,7 @@ const CartasPokemon = ({ history }) => {
                   .then((data) => dispatch(SelectPokemon(data)));
               })
               .then(() => {
-                if (LISTA.length >= LIMITE) {
+                if (myList[0].length >= LIMITE) {
                   loadingFinish();
                 } else {
                   setLOADING(true);
